@@ -1,0 +1,36 @@
+name = "resume-analyzer"
+main = "src/index.ts"
+compatibility_date = "2026-07-09"
+compatibility_flags = ["nodejs_compat"]
+
+[observability]
+enabled = true
+head_sampling_rate = 1
+
+# Workers AI binding (use remote during local development)
+[ai]
+binding = "AI"
+remote = true
+
+# D1 database
+[[d1_databases]]
+binding = "DB"
+database_name = "resume-analyzer-db"
+database_id = "61b2f07b-58fd-4fd6-8add-604bbe90da3c"
+migrations_dir = "migrations"
+
+# R2 bucket
+[[r2_buckets]]
+binding = "RESUME_BUCKET"
+bucket_name = "resume-analyzer-files"
+
+# Queue for background resume processing
+[[queues.producers]]
+binding = "RESUME_QUEUE"
+queue = "resume-analyzer-queue"
+
+[[queues.consumers]]
+queue = "resume-analyzer-queue"
+max_batch_size = 3
+max_batch_timeout = 30
+max_retries = 3

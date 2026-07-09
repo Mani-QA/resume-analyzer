@@ -1,0 +1,24 @@
+{
+  "name": "resume-analyzer",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:create": "wrangler d1 create resume-analyzer-db",
+    "db:migrate:local": "wrangler d1 execute resume-analyzer-db --local --file=./schema.sql",
+    "db:migrate:remote": "wrangler d1 execute resume-analyzer-db --remote --file=./schema.sql",
+    "cf-typegen": "wrangler types"
+  },
+  "dependencies": {
+    "hono": "^4.8.3",
+    "mammoth": "^1.9.1",
+    "unpdf": "^1.0.6"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250709.0",
+    "typescript": "^5.8.3",
+    "wrangler": "^4.24.0"
+  }
+}
